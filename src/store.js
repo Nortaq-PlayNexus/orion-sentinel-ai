@@ -18,6 +18,9 @@ export const useStore = create((set) => ({
   oceanMode: false,
   setOceanMode: (v) => set({ oceanMode: v }),
 
+  satellite: true,
+  setSatellite: (v) => set({ satellite: v }),
+
   anomalies: [],
   feed: [],
   selectedId: null,

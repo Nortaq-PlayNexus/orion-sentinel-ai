@@ -27,6 +27,7 @@ The platform never asserts certainty. Every detection is presented as a _probabi
 ### 🛰️ Real-time 3D Earth observation
 
 - Full-screen photorealistic-style 3D globe built on WebGL (`@react-three/fiber` + `three`)
+- **Real satellite imagery** — the globe streams Google-Earth-grade tiles from the free Esri World Imagery service (toggleable, with an offline procedural fallback)
 - Procedurally generated day/night textures with night-time city lights and a terminator sweep
 - Animated cloud coverage, atmospheric glow, sun lighting, and a 7,000-star field
 - Seamless rotate, zoom, and exploration with inertial auto-orbit
@@ -156,7 +157,7 @@ The application is a single-page React app with a clear separation between the *
 └──────────────┴───────────────────────────────┴────────────────┘
 ```
 
-- **`src/globe/`** — the WebGL scene graph. Textures are generated procedurally at runtime (fully offline-capable), and every layer is a self-contained component driven by the shared store.
+- **`src/globe/`** — the WebGL scene graph. Textures are generated procedurally at runtime, and `imagery.js` streams real Esri satellite tiles with a procedural fallback when offline. Every layer is a self-contained component driven by the shared store.
 - **`src/core/`** — pure-logic modules: geospatial math (`geo.js`), the anomaly engine (`engine.js`), the command interpreter (`orionAI.js`), and procedural texture synthesis (`textures.js`).
 - **`src/store.js`** — a single [Zustand](https://github.com/pmndrs/zustand) store that connects the 3D scene, the analysis stream, and every UI panel.
 - **`src/components/`** — the mission-control UI, all styled through `src/index.css` with a glassmorphism design system.
@@ -227,7 +228,7 @@ Security issues should be reported privately per our [security policy](docs/secu
 
 ## License
 
-Released under the [MIT License](LICENSE). The Earth visualization is procedurally generated at runtime and requires no external asset licensing.
+Released under the [MIT License](LICENSE). Satellite imagery is provided by the free public Esri World Imagery service (`Imagery © Esri, Maxar, Earthstar Geographics`); when the layer is disabled or the network is unavailable, the Earth is rendered with procedurally generated textures and no external asset licensing is required.
 
 <div align="center">
 

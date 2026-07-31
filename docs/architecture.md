@@ -53,17 +53,18 @@ These modules are unit-tested in isolation with Vitest (see `src/**/*.test.js`).
 
 A `@react-three/fiber` scene graph. Each layer is an isolated component:
 
-| Component                                   | Rendering                                                                                                                                                                      |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Earth`                                     | Custom GLSL shader blending a day map, night-lights map, and terminator logic driven by a fixed sun direction. In ocean mode the day map is swapped for a bathymetric texture. |
-| `Clouds`                                    | Translucent cloud sphere lit by the same sun vector.                                                                                                                           |
-| `Atmosphere`                                | Fresnel glow shell (additive back-face shader); color shifts in ocean mode.                                                                                                    |
-| `SatelliteLayer`                            | ~26 orbiting craft with fading trail lines.                                                                                                                                    |
-| `HeatLayer` / `MarineLife`                  | GPU `Points` clouds with pulsing opacity.                                                                                                                                      |
-| `MagneticField` / `ScanRings` / `GridLayer` | `LineSegments`/`Line` overlays.                                                                                                                                                |
-| `WeatherLayer`                              | Billboarded cyclone sprites.                                                                                                                                                   |
-| `FlightArcs`                                | Quadratic Bézier great-circle arcs with traveling dots.                                                                                                                        |
-| `AnomalyMarkers`                            | Per-anomaly marker mesh + pulsing ring; the selected marker renders an HTML label.                                                                                             |
+| Component                                   | Rendering                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Earth`                                     | Custom GLSL shader blending a day map, night-lights map, and terminator logic driven by a fixed sun direction. The day map is real satellite imagery (Esri World Imagery) when the satellite-imagery layer is enabled; it falls back to procedural synthesis when offline or toggled off. In ocean mode the day map is swapped for a bathymetric texture. |
+| `ImageryDriver`                             | Camera-tracking controller: each frame it derives the surface pixel density on screen and, throttled and movement-quantized, requests a high-detail satellite tile mosaic for the visible region from `imagery.js`.                                                                                                                                       |
+| `Clouds`                                    | Translucent cloud sphere lit by the same sun vector.                                                                                                                                                                                                                                                                                                      |
+| `Atmosphere`                                | Fresnel glow shell (additive back-face shader); color shifts in ocean mode.                                                                                                                                                                                                                                                                               |
+| `SatelliteLayer`                            | ~26 orbiting craft with fading trail lines.                                                                                                                                                                                                                                                                                                               |
+| `HeatLayer` / `MarineLife`                  | GPU `Points` clouds with pulsing opacity.                                                                                                                                                                                                                                                                                                                 |
+| `MagneticField` / `ScanRings` / `GridLayer` | `LineSegments`/`Line` overlays.                                                                                                                                                                                                                                                                                                                           |
+| `WeatherLayer`                              | Billboarded cyclone sprites.                                                                                                                                                                                                                                                                                                                              |
+| `FlightArcs`                                | Quadratic Bézier great-circle arcs with traveling dots.                                                                                                                                                                                                                                                                                                   |
+| `AnomalyMarkers`                            | Per-anomaly marker mesh + pulsing ring; the selected marker renders an HTML label.                                                                                                                                                                                                                                                                        |
 
 Every component subscribes directly to the store, so layer toggles and ocean mode update the scene without prop drilling.
 
@@ -74,6 +75,40 @@ Every component subscribes directly to the store, so layer toggles and ocean mod
 3. Each scanner tick constructs a new anomaly via `engine.spawnAnomaly()`, dispatches it into the store, and schedules the next tick on a randomized cadence (~1.5–4 s).
 4. The store notifies subscribers: the globe adds a marker, the feed prepends an event, and the top-bar counters update.
 5. The render loop (`useFrame`) animates rotations, trails, rings, and scan beams at 60 fps.
+
+## Satellite imagery pipeline (`src/globe/imagery.js`)
+
+The globe streams real satellite imagery from the free public Esri World Imagery
+tile service (attribution shown in the UI; `Imagery © Esri, Maxar, Earthstar
+Geographics`). A single provider manages two layers:
+
+1. **Base mosaic** — the full globe reprojected into an equirectangular
+   `2048×1024` canvas from 64 Web-Mercator tiles at zoom 3. This is the default
+   day map, so even the far view shows genuine satellite imagery.
+2. **Adaptive detail overlay** — as the camera approaches the surface, the
+   `ImageryDriver` computes the pixel density the screen can actually resolve
+   and requests a tile mosaic for the visible region at the matching tile zoom
+   (typically z 4–8). The region and its resolution are chosen so the fetch
+   budget stays bounded (~≤100 tiles per update), shrinking the covered box as
+   the required zoom grows. It is reprojected into a second texture and blended
+   over the base in the fragment shader with a soft edge fade.
+
+Key mechanics:
+
+- **Projection**: Web-Mercator tiles (EPSG:3857) are reprojected into
+  equirectangular space per-pixel (`webMercatorY`/`mercatorToLat`), with
+  antimeridian wrapping and polar clamping handled explicitly.
+- **Caching**: decoded tiles are held in a bounded LRU cache shared across base
+  and detail updates, so orbit/zoom reuse fetches.
+- **Throttling**: the driver refreshes detail at most every ~900 ms and only
+  when the camera-facing region has moved enough to matter; `autoRotate` keeps
+  it mostly hitting cache.
+- **Resilience**: if the tile service is unreachable, the provider reports
+  offline and the shader falls back to the fully procedural Earth — the app
+  keeps working with no internet connection.
+
+The projection helpers are pure functions covered by unit tests in
+`src/globe/imagery.test.js`.
 
 ## Why a single state store?
 

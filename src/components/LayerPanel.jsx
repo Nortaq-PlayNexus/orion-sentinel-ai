@@ -1,4 +1,5 @@
 import { useStore } from '../store'
+import { IMAGERY_ATTRIBUTION } from '../globe/imagery'
 
 const LAYERS = [
   { key: 'satellites', label: 'Satellite constellation', icon: '◆' },
@@ -16,6 +17,8 @@ export default function LayerPanel() {
   const oceanMode = useStore((s) => s.oceanMode)
   const setOceanMode = useStore((s) => s.setOceanMode)
   const setTab = useStore((s) => s.setTab)
+  const satellite = useStore((s) => s.satellite)
+  const setSatellite = useStore((s) => s.setSatellite)
 
   return (
     <div className="glass panel layer-panel">
@@ -40,6 +43,12 @@ export default function LayerPanel() {
       </div>
       <div className="layer-divider" />
       <div className="layer-modes">
+        <button
+          className={`mode-row ${satellite ? 'on' : ''}`}
+          onClick={() => setSatellite(!satellite)}
+        >
+          <span className="layer-icon">🛰</span> SATELLITE IMAGERY
+        </button>
         <button className={`mode-row ${oceanMode ? 'on' : ''}`} onClick={() => setOceanMode(true)}>
           <span className="layer-icon">≈</span> UNDERWATER GLOBE
         </button>
@@ -53,6 +62,7 @@ export default function LayerPanel() {
           <span className="layer-icon">▶</span> OCEAN INTELLIGENCE MODULE
         </button>
       </div>
+      <div className="layer-credit">{IMAGERY_ATTRIBUTION}</div>
     </div>
   )
 }

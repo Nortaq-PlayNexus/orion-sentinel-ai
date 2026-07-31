@@ -63,6 +63,7 @@ Every detection produced by `engine.spawnAnomaly()` adheres to the following sha
   layers: {                      // visual layer toggles
     satellites, clouds, weather, heat, magnetic, grid, flight,
   },
+  satellite: boolean,            // stream real satellite imagery (Esri World Imagery)
   oceanMode: boolean,
   scanning: boolean,
   scanSector: string,

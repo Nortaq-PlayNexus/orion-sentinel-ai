@@ -18,9 +18,9 @@ npm install
 npm run dev
 ```
 
-> The entire planet, including day/night textures, is generated procedurally at
-> runtime — there are no image or audio assets to download, and the app works
-> fully offline after install.
+> The planet ships with fully procedural fallback textures, so the app runs with
+> no internet connection. With a connection, the satellite-imagery layer (on by
+> default) streams real Esri World Imagery tiles for a Google-Earth-grade view.
 
 ## Scripts
 

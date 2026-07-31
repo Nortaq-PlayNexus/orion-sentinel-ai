@@ -8,11 +8,19 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Satellite-grade Earth imagery** — the globe now streams real imagery from
+  the free public Esri World Imagery tile service. A global base mosaic (zoom 3)
+  replaces the procedural day map, and an adaptive detail overlay streams the
+  visible region at matching zoom (typically z 4–8) with a bounded tile budget
+  and LRU caching. Includes a toggleable satellite-imagery layer, UI
+  attribution (`Imagery © Esri, Maxar, Earthstar Geographics`), and automatic
+  fallback to procedural textures when offline or unreachable.
 - Full enterprise repository scaffold: professional README, docs suite,
   community files, CI/CD workflows, Docker support, branding assets, and
   automated tests.
-- Test suite (Vitest) covering the simulation layer, store invariants, and
-  procedural texture synthesis — 23 tests across 5 files.
+- Test suite (Vitest) covering the simulation layer, store invariants,
+  procedural texture synthesis, and imagery projection math — 42 tests across 6
+  files.
 - Tooling: oxlint, Prettier, EditorConfig, Git attributes.
 
 ## [1.0.0] — 2026-07-31

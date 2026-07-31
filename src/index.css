@@ -417,6 +417,15 @@ input {
   font-size: 10px;
   letter-spacing: 0.1em;
 }
+.layer-credit {
+  padding: 6px 10px 8px;
+  font-size: 9px;
+  line-height: 1.5;
+  color: var(--dim);
+  opacity: 0.75;
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--panel-border);
+}
 .mode-row.on {
   color: var(--accent);
 }

@@ -1,15 +1,16 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Stars, Html } from '@react-three/drei'
 import { useStore } from '../store'
-import { latLonToVec3 } from '../core/geo'
+import { latLonToVec3, vec3ToLatLon } from '../core/geo'
 import {
   createEarthTextures,
   createNightLights,
   createCloudTexture,
   createBathymetryTexture,
 } from './textures'
+import { createImageryProvider, surfacePxPerDeg, zoomForPxPerDeg } from './imagery'
 
 const SUN_DIR = new THREE.Vector3(0.32, 0.38, 0.87).normalize()
 
@@ -182,6 +183,51 @@ function FlightArcs() {
   )
 }
 
+/* ------------------------------ Imagery driver ------------------------------ */
+
+const _invMat = new THREE.Matrix4()
+const _camDir = new THREE.Vector3()
+
+function ImageryDriver({ imagery, earthRef, uniforms }) {
+  const camera = useThree((s) => s.camera)
+  const size = useThree((s) => s.size)
+  const viewport = useThree((s) => s.viewport)
+  const lastAt = useRef(0)
+  const lastKey = useRef('')
+
+  useFrame(() => {
+    const earth = earthRef.current
+    if (!earth) return
+    const d = camera.position.length()
+    const halfFov = (camera.fov * Math.PI) / 360
+    const focalPx = (size.height * viewport.dpr) / 2 / Math.tan(halfFov)
+    const pxPerDeg = surfacePxPerDeg(d, focalPx)
+    const z = zoomForPxPerDeg(pxPerDeg, 4)
+    if (z <= 3) {
+      uniforms.detailActive.value = 0
+      return
+    }
+    const now = performance.now()
+    if (now - lastAt.current < 900) return
+    lastAt.current = now
+
+    _invMat.copy(earth.matrixWorld).invert()
+    _camDir.copy(camera.position).applyMatrix4(_invMat).normalize()
+    const ll = vec3ToLatLon(_camDir)
+    const key = `${z}|${Math.round(ll.lat / 1.2)}|${Math.round(ll.lon / 1.5)}`
+    if (key === lastKey.current) return
+    lastKey.current = key
+
+    uniforms.detailActive.value = 1
+    imagery.requestDetail({ centerLat: ll.lat, centerLon: ll.lon, pxPerDeg }).then(() => {
+      const r = imagery.getDetailRect()
+      uniforms.detailRect.value.set(r.u0, r.v0, r.u1, r.v1)
+    })
+  })
+
+  return null
+}
+
 /* ---------------------------------- Earth ---------------------------------- */
 
 const EarthVert = `
@@ -197,16 +243,38 @@ void main() {
 const EarthFrag = `
 uniform sampler2D dayMap;
 uniform sampler2D nightMap;
+uniform sampler2D detailMap;
+uniform vec4 detailRect;
+uniform float detailActive;
 uniform vec3 sunDirection;
 varying vec2 vUv;
 varying vec3 vNormal;
+
+vec3 sampleDay(vec2 uv) {
+  vec4 day = texture2D(dayMap, uv);
+  if (detailActive > 0.5) {
+    vec4 r = detailRect;
+    float span = r.z - r.x;
+    if (span > 0.001 && r.w > r.y) {
+      float mu = mod(uv.x - r.x, 1.0);
+      float au = clamp(mu / span, 0.0, 1.0);
+      float av = clamp((uv.y - r.y) / (r.w - r.y), 0.0, 1.0);
+      float f = 0.05;
+      float eu = smoothstep(0.0, f, au) * (1.0 - smoothstep(1.0 - f, 1.0, au));
+      float ev = smoothstep(0.0, f, av) * (1.0 - smoothstep(1.0 - f, 1.0, av));
+      vec4 hi = texture2D(detailMap, vec2(au, av));
+      day = mix(day, hi, eu * ev * step(0.5, hi.a));
+    }
+  }
+  return day.rgb;
+}
+
 void main() {
-  vec4 day = texture2D(dayMap, vUv);
   vec4 night = texture2D(nightMap, vUv);
   vec3 n = normalize(vNormal);
   float diff = clamp(dot(n, sunDirection), 0.0, 1.0);
   float nightMix = smoothstep(0.16, 0.02, diff);
-  vec3 dayColor = day.rgb * (0.16 + diff * 1.05);
+  vec3 dayColor = sampleDay(vUv) * (0.16 + diff * 1.05);
   vec3 nightColor = night.rgb * 2.6;
   vec3 color = mix(dayColor, max(dayColor * 0.18, nightColor * nightMix), nightMix);
   vec3 twilight = vec3(0.10, 0.16, 0.28) * pow(1.0 - abs(diff - 0.0), 14.0) * 0.6;
@@ -217,14 +285,39 @@ void main() {
 
 function Earth() {
   const oceanMode = useStore((s) => s.oceanMode)
+  const satellite = useStore((s) => s.satellite)
   const group = useRef()
-  const { dayMap, nightMap, bathMap } = useMemo(
+  const [offline, setOffline] = useState(false)
+  const [imagery, setImagery] = useState(null)
+
+  const { nightMap, bathMap, proceduralDay } = useMemo(
     () => ({
-      dayMap: createEarthTextures(),
       nightMap: createNightLights(),
       bathMap: createBathymetryTexture(),
+      proceduralDay: createEarthTextures(),
     }),
     [],
+  )
+
+  useEffect(() => {
+    if (!satellite) {
+      setOffline(false)
+      setImagery(null)
+      return
+    }
+    const im = createImageryProvider({
+      onOffline: () => setOffline(true),
+    })
+    setImagery(im)
+    return () => {
+      im.dispose()
+      setImagery(null)
+    }
+  }, [satellite])
+
+  const dayMap = useMemo(
+    () => (satellite && imagery && !offline ? imagery.baseTexture : proceduralDay),
+    [satellite, imagery, offline, proceduralDay],
   )
 
   const uniforms = useMemo(
@@ -232,8 +325,11 @@ function Earth() {
       dayMap: { value: dayMap },
       nightMap: { value: nightMap },
       sunDirection: { value: SUN_DIR },
+      detailMap: { value: imagery ? imagery.getDetailTexture() : nightMap },
+      detailRect: { value: new THREE.Vector4(0, 0, -1, -1) },
+      detailActive: { value: 0 },
     }),
-    [dayMap, nightMap],
+    [dayMap, nightMap, imagery],
   )
 
   useFrame((_, delta) => {
@@ -250,6 +346,9 @@ function Earth() {
           fragmentShader={EarthFrag}
         />
       </mesh>
+      {satellite && imagery && (
+        <ImageryDriver imagery={imagery} earthRef={group} uniforms={uniforms} />
+      )}
     </group>
   )
 }
