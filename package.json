@@ -8,11 +8,11 @@
   "author": "ORION Sentinel AI Contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/orion-sentinel-ai/orion-sentinel-ai"
+    "url": "https://github.com/Nortaq-PlayNexus/orion-sentinel-ai"
   },
-  "homepage": "https://github.com/orion-sentinel-ai/orion-sentinel-ai#readme",
+  "homepage": "https://github.com/Nortaq-PlayNexus/orion-sentinel-ai#readme",
   "bugs": {
-    "url": "https://github.com/orion-sentinel-ai/orion-sentinel-ai/issues"
+    "url": "https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/issues"
   },
   "keywords": [
     "earth-observation",

@@ -45,5 +45,5 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Earth imagery is procedurally synthesized at runtime; no external assets or
   network requests are required.
 
-[Unreleased]: https://github.com/orion-sentinel-ai/orion-sentinel-ai/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/orion-sentinel-ai/orion-sentinel-ai/releases/tag/v1.0.0
+[Unreleased]: https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/releases/tag/v1.0.0

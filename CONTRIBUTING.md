@@ -31,7 +31,7 @@ By participating you agree to uphold the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ```bash
 # fork, then
-git clone https://github.com/orion-sentinel-ai/orion-sentinel-ai.git
+git clone https://github.com/Nortaq-PlayNexus/orion-sentinel-ai.git
 cd orion-sentinel-ai
 npm install
 npm run dev            # http://localhost:5173

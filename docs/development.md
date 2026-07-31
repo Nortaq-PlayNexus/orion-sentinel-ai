@@ -12,7 +12,7 @@ Setup, tooling, and workflow for contributors to ORION Sentinel AI.
 ## First-time setup
 
 ```bash
-git clone https://github.com/orion-sentinel-ai/orion-sentinel-ai.git
+git clone https://github.com/Nortaq-PlayNexus/orion-sentinel-ai.git
 cd orion-sentinel-ai
 npm install
 npm run dev

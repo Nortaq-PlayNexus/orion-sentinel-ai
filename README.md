@@ -7,8 +7,8 @@
 **A cinematic planetary intelligence platform — real-time 3D Earth observation, AI agent analysis, and anomaly detection, rendered as a futuristic mission-control command center.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![CI](https://github.com/orion-sentinel-ai/orion-sentinel-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/orion-sentinel-ai/orion-sentinel-ai/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/orion-sentinel-ai/orion-sentinel-ai)](https://github.com/orion-sentinel-ai/orion-sentinel-ai/releases)
+[![CI](https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/Nortaq-PlayNexus/orion-sentinel-ai)](https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/releases)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![Three.js](https://img.shields.io/badge/Three.js-r185-000000?logo=threedotjs&logoColor=white)](https://threejs.org)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev)
@@ -78,7 +78,7 @@ The platform never asserts certainty. Every detection is presented as a _probabi
 
 ```bash
 # 1. Clone
-git clone https://github.com/orion-sentinel-ai/orion-sentinel-ai.git
+git clone https://github.com/Nortaq-PlayNexus/orion-sentinel-ai.git
 cd orion-sentinel-ai
 
 # 2. Install dependencies
