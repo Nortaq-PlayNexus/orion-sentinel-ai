@@ -9,8 +9,34 @@ import {
   computeRegion,
   surfacePxPerDeg,
   visibleCapHalfAngle,
+  tileUrlResolver,
+  ESRI_TILE_URL,
   MAX_MERC_LAT,
 } from './imagery'
+
+describe('tileUrlResolver', () => {
+  it('substitutes {z}/{x}/{y} placeholders', () => {
+    const resolve = tileUrlResolver(['https://tiles.test/{z}/{x}/{y}'])
+    expect(resolve(4, 7, 3)).toBe('https://tiles.test/4/7/3')
+  })
+
+  it('rotates across multiple templates', () => {
+    const resolve = tileUrlResolver(['https://a.test/{z}/{x}/{y}', 'https://b.test/{z}/{x}/{y}'])
+    expect(resolve(2, 1, 1)).toBe('https://a.test/2/1/1')
+    expect(resolve(2, 1, 1)).toBe('https://b.test/2/1/1')
+    expect(resolve(2, 1, 1)).toBe('https://a.test/2/1/1')
+  })
+
+  it('drops blank entries and trims whitespace', () => {
+    const resolve = tileUrlResolver([' https://a.test/{z}/{x}/{y} ', '', '  '])
+    expect(resolve(1, 0, 0)).toBe('https://a.test/1/0/0')
+  })
+
+  it('falls back to Esri World Imagery when no templates are given', () => {
+    const resolve = tileUrlResolver([])
+    expect(resolve(3, 5, 2)).toBe(ESRI_TILE_URL(3, 5, 2))
+  })
+})
 
 describe('webMercatorY', () => {
   it('maps the equator to 0.5', () => {

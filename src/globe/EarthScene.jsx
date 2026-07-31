@@ -4,15 +4,17 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Stars, Html } from '@react-three/drei'
 import { useStore } from '../store'
 import { latLonToVec3, vec3ToLatLon } from '../core/geo'
+import { prefersReducedMotion } from '../core/motion'
 import {
   createEarthTextures,
   createNightLights,
   createCloudTexture,
   createBathymetryTexture,
 } from './textures'
-import { createImageryProvider, surfacePxPerDeg, zoomForPxPerDeg } from './imagery'
+import { createImageryProvider, surfacePxPerDeg, tileUrlResolver, zoomForPxPerDeg } from './imagery'
 
 const SUN_DIR = new THREE.Vector3(0.32, 0.38, 0.87).normalize()
+const REDUCED_MOTION = prefersReducedMotion()
 
 /* -------------------------------- Weather layer ------------------------------ */
 
@@ -305,7 +307,15 @@ function Earth() {
       setImagery(null)
       return
     }
+    const envTemplates = import.meta.env.VITE_IMAGERY_TILE_URLS || ''
+    const tileUrls = envTemplates
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean)
+    const cacheLimit = Number(import.meta.env.VITE_IMAGERY_CACHE_LIMIT) || 0
     const im = createImageryProvider({
+      tileUrl: tileUrls.length ? tileUrlResolver(tileUrls) : undefined,
+      maxTiles: cacheLimit > 0 ? cacheLimit : undefined,
       onOffline: () => setOffline(true),
     })
     setImagery(im)
@@ -333,7 +343,7 @@ function Earth() {
   )
 
   useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.05
+    if (!REDUCED_MOTION && group.current) group.current.rotation.y += delta * 0.05
   })
 
   return (
@@ -387,7 +397,8 @@ function Clouds() {
   const uniforms = useMemo(() => ({ map: { value: tex }, sunDirection: { value: SUN_DIR } }), [tex])
 
   useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += delta * 0.012
+    if (REDUCED_MOTION || !ref.current) return
+    ref.current.rotation.y += delta * 0.012
   })
 
   if (!visible) return null
@@ -627,7 +638,8 @@ function MagneticField() {
   }, [])
 
   useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.08
+    if (REDUCED_MOTION || !group.current) return
+    group.current.rotation.y += delta * 0.08
   })
 
   if (!visible) return null
@@ -767,7 +779,8 @@ function ScanRings() {
     [],
   )
   useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.25
+    if (REDUCED_MOTION || !group.current) return
+    group.current.rotation.y += delta * 0.25
   })
   return (
     <group ref={group}>
@@ -947,7 +960,7 @@ export default function EarthScene() {
         enablePan={false}
         minDistance={1.35}
         maxDistance={9}
-        autoRotate
+        autoRotate={!REDUCED_MOTION}
         autoRotateSpeed={0.35}
         makeDefault
       />

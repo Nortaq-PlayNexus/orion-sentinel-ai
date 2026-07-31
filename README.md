@@ -63,6 +63,8 @@ The platform never asserts certainty. Every detection is presented as a _probabi
 
 ## Screenshots
 
+![Live satellite globe](docs/screenshots/globe-demo.gif)
+
 | Main command center                          | Ocean intelligence mode                   |
 | -------------------------------------------- | ----------------------------------------- |
 | ![Main view](docs/screenshots/dashboard.png) | ![Ocean mode](docs/screenshots/ocean.png) |

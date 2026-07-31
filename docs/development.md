@@ -41,6 +41,17 @@ npm run dev
 
 Run `npm run check` before pushing. CI runs the identical command.
 
+## Environment variables
+
+The app runs with **no required environment variables**. All options are
+optional — copy `.env.example` to `.env` only to override a default (Vite
+exposes `VITE_`-prefixed variables to the client at build time):
+
+| Variable                   | Default                                                  | Purpose                                                           |
+| -------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------- |
+| `VITE_IMAGERY_TILE_URLS`   | Esri World Imagery (hardcoded in `src/globe/imagery.js`) | Comma-separated `{z}/{y}/{x}` tile templates, rotated round-robin |
+| `VITE_IMAGERY_CACHE_LIMIT` | `640`                                                    | Max tiles kept in the imagery LRU cache                           |
+
 ## Project layout
 
 ```

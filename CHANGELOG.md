@@ -19,9 +19,18 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   community files, CI/CD workflows, Docker support, branding assets, and
   automated tests.
 - Test suite (Vitest) covering the simulation layer, store invariants,
-  procedural texture synthesis, and imagery projection math — 42 tests across 6
+  procedural texture synthesis, and imagery projection math — 46 tests across 6
   files.
 - Tooling: oxlint, Prettier, EditorConfig, Git attributes.
+- **Configurable imagery provider** — tile templates and cache size are now
+  overridable via `VITE_IMAGERY_TILE_URLS` and `VITE_IMAGERY_CACHE_LIMIT`
+  (see `.env.example`), enabling self-hosted or proxied tile servers.
+- **Reduced-motion support** — globe and layer auto-rotation respects
+  `prefers-reduced-motion`.
+- **Animated demo** — a satellite-globe loop GIF now leads the README
+  `Screenshots` section.
+- Security and conduct reporting now uses GitHub-native channels (Private
+  Vulnerability Reporting / issues) instead of placeholder emails.
 
 ## [1.0.0] — 2026-07-31
 

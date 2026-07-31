@@ -110,7 +110,7 @@ npm run test:coverage # coverage report
   [Code of Conduct](CODE_OF_CONDUCT.md) — no harassment, no gatekeeping, no
   personal attacks.
 - **GitHub issues are public.** Do not post credentials, tokens, or personal
-  data. Security issues go to <security@orion-sentinel-ai.dev> — see
+  data. Report security issues via GitHub Private Vulnerability Reporting — see
   [SECURITY.md](SECURITY.md).
 
 ## Review process

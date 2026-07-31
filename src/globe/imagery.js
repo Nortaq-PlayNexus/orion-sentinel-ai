@@ -3,6 +3,15 @@ import * as THREE from 'three'
 export const TILE_SIZE = 256
 export const ESRI_TILE_URL = (z, x, y) =>
   `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`
+export function tileUrlResolver(templates) {
+  const urls = templates.map((t) => t.trim()).filter(Boolean)
+  if (urls.length === 0) return ESRI_TILE_URL
+  let i = 0
+  return (z, x, y) => {
+    const url = urls[i++ % urls.length]
+    return url.replace(/\{z\}/g, z).replace(/\{y\}/g, y).replace(/\{x\}/g, x)
+  }
+}
 export const IMAGERY_ATTRIBUTION = 'Imagery © Esri, Maxar, Earthstar Geographics'
 export const MAX_MERC_LAT = 85.05
 

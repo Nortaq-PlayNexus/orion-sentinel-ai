@@ -7,8 +7,10 @@ assignees: ''
 
 **Do NOT use this form for public security reports.** GitHub issues are public.
 
-Please email <security@orion-sentinel-ai.dev> instead — see
-[SECURITY.md](../../SECURITY.md) for the disclosure policy and required details.
+Use **GitHub Private Vulnerability Reporting** instead — see
+[SECURITY.md](../../SECURITY.md) for the disclosure policy and required details,
+or start a report at
+<https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/security/advisories/new>.
 
 This template exists so the report route is discoverable; opening an issue here
 will be closed and redirected to the private channel.

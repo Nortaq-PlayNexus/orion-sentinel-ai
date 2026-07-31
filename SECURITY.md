@@ -8,7 +8,8 @@ Please read the full threat model and posture in
 
 **Do not open a public issue** for security problems. Report privately:
 
-- **Email:** <security@orion-sentinel-ai.dev>
+- **GitHub Private Vulnerability Reporting:** create a report at
+  <https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/security/advisories/new>
 - **PGP:** key published via the maintainer's GitHub profile
 - **Required details:** affected version, browser/OS, reproduction steps,
   expected vs observed behavior, and impact.

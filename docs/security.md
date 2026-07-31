@@ -56,8 +56,9 @@ requires `connect-src 'self' ws:` for HMR.
 
 **Do not open a public issue for security problems.**
 
-- Email the maintainers at <security@orion-sentinel-ai.dev> (PGP key published
-  via the GitHub maintainer profile).
+- Use GitHub Private Vulnerability Reporting
+  (<https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/security/advisories/new>);
+  PGP key, where available, is published via the GitHub maintainer profile.
 - Optionally encrypt; unencrypted reports are accepted but plaintext should be
   assumed at-rest unencrypted.
 - Include a minimal reproducer: affected version, browser/OS, steps, and impact.
