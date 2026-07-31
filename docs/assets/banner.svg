@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" width="1600" height="400">
+  <defs>
+    <radialGradient id="bg" cx="20%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#0a1730"/>
+      <stop offset="100%" stop-color="#03050b"/>
+    </radialGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#46e0ff"/>
+      <stop offset="100%" stop-color="#c77dff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="400" fill="url(#bg)"/>
+  <circle cx="1180" cy="200" r="170" fill="none" stroke="rgba(70,224,255,0.22)" stroke-width="3"/>
+  <circle cx="1180" cy="200" r="120" fill="none" stroke="rgba(70,224,255,0.4)" stroke-width="4" stroke-dasharray="380 220" transform="rotate(-40 1180 200)"/>
+  <circle cx="1180" cy="200" r="60" fill="#46e0ff" opacity="0.9"/>
+  <circle cx="1320" cy="90" r="10" fill="#c77dff"/>
+  <circle cx="1040" cy="310" r="8" fill="#ffcf6b"/>
+  <text x="70" y="180" font-family="'Cascadia Mono','Consolas',monospace" font-size="78" font-weight="800" fill="#ffffff" letter-spacing="10">ORION</text>
+  <text x="70" y="262" font-family="'Cascadia Mono','Consolas',monospace" font-size="44" font-weight="700" fill="url(#glow)" letter-spacing="8">SENTINEL AI</text>
+  <text x="72" y="316" font-family="'Cascadia Mono','Consolas',monospace" font-size="18" fill="#7b92ad" letter-spacing="4">PLANETARY INTELLIGENCE COMMAND &middot; EARTH OBSERVATION &middot; AI ANOMALY DETECTION</text>
+</svg>

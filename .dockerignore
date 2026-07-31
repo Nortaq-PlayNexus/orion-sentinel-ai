@@ -1,0 +1,17 @@
+node_modules
+dist
+coverage
+.git
+.github
+docs
+*.md
+Dockerfile
+.dockerignore
+docker-compose.yml
+nginx.conf
+.editorconfig
+.gitattributes
+.gitignore
+.prettierignore
+.prettierrc.json
+.oxlintrc.json

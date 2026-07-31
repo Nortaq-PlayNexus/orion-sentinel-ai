@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run quality gate
+        run: npm run check
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Package assets
+        run: |
+          tar -czf orion-sentinel-ai.tar.gz dist
+          zip -r orion-sentinel-ai.zip dist
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            orion-sentinel-ai.tar.gz
+            orion-sentinel-ai.zip
