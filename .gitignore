@@ -41,3 +41,8 @@ Thumbs.db
 
 # OS metadata
 Desktop.ini
+
+# Electron
+release/
+electron/dist/
+
