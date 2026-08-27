@@ -8,7 +8,6 @@ docs
 Dockerfile
 .dockerignore
 docker-compose.yml
-nginx.conf
 .editorconfig
 .gitattributes
 .gitignore
