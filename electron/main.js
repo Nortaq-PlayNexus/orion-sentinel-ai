@@ -1,10 +1,10 @@
-import { app, BrowserWindow } from 'electron';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import { app, BrowserWindow } from 'electron'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const DIST = path.join(__dirname, '..', 'dist');
+const DIST = path.join(__dirname, '..', 'dist')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -16,19 +16,19 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
     },
-  });
+  })
 
-  win.loadFile(path.join(DIST, 'index.html'));
+  win.loadFile(path.join(DIST, 'index.html'))
 }
 
 app.whenReady().then(() => {
-  createWindow();
+  createWindow()
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
-});
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
+  if (process.platform !== 'darwin') app.quit()
+})
