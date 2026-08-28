@@ -63,7 +63,7 @@
     "electron-builder": "^26.15.3",
     "oxlint": "^1.75.0",
     "prettier": "^3.4.0",
-    "vite": "^8.2.0",
+    "vite": "^8.2.2",
     "vitest": "^4.1.10"
   },
   "build": {
