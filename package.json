@@ -61,7 +61,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "electron": "^44.0.0",
     "electron-builder": "^26.15.3",
-    "oxlint": "^1.75.0",
+    "oxlint": "^1.80.0",
     "prettier": "^3.4.0",
     "vite": "^8.2.0",
     "vitest": "^4.1.10"
