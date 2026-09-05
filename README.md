@@ -1,130 +1,140 @@
-<div align="center">
+<p align="center">
+  <picture>
+    <img src="docs/assets/banner.svg" alt="ORION Sentinel AI banner" width="100%" />
+  </picture>
+</p>
 
-![ORION Sentinel AI](docs/assets/banner.svg)
+# ORION SENTINEL AI :: PLANETARY COMMAND
 
-# ORION Sentinel AI
+**A cinematic planetary intelligence platform — real-time 3D Earth observation, simulated multi-agent AI anomaly detection, and a natural-language command assistant. Rendered as a futuristic mission-control command center.**
 
-**A cinematic planetary intelligence platform — real-time 3D Earth observation, AI agent analysis, and anomaly detection, rendered as a futuristic mission-control command center.**
+<p align="center">
+  <a href="https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Nortaq-PlayNexus/orion-sentinel-ai/ci.yml?style=flat-square&label=CI&labelColor=0a0e1a&color=B8FF1E" alt="ci"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-ff3b3b?style=flat-square&labelColor=0a0e1a" alt="license"/></a>
+  <img src="https://img.shields.io/badge/REACT-19-3dd5ff?style=flat-square&logo=react&logoColor=3dd5ff&labelColor=0a0e1a" alt="react"/>
+  <img src="https://img.shields.io/badge/THREE.js-r185-ffc430?style=flat-square&logo=threedotjs&logoColor=ffc430&labelColor=0a0e1a" alt="three"/>
+  <img src="https://img.shields.io/badge/VITE-8-00E5FF?style=flat-square&logo=vite&logoColor=00E5FF&labelColor=0a0e1a" alt="vite"/>
+  <img src="https://img.shields.io/badge/NODE-%E2%89%A520-E8E8E8?style=flat-square&labelColor=0a0e1a" alt="node"/>
+</p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![CI](https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/Nortaq-PlayNexus/orion-sentinel-ai)](https://github.com/Nortaq-PlayNexus/orion-sentinel-ai/releases)
-[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
-[![Three.js](https://img.shields.io/badge/Three.js-r185-000000?logo=threedotjs&logoColor=white)](https://threejs.org)
-[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev)
-[![Node](https://img.shields.io/badge/Node-%3E%3D20-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
+```
+[ SAT ]  orbit locked. earth in view. eyes everywhere, claim nothing.
+```
 
-</div>
-
-**ORION Sentinel AI** is a live AI exploration and anomaly-detection platform wrapped in a fully immersive 3D Earth interface. It fuses satellite-style imagery, ocean intelligence, atmospheric tracking, and geological data — processed through a simulated multi-agent AI pipeline — into a single cinematic desktop-style web application.
-
-The platform never asserts certainty. Every detection is presented as a _probability-weighted hypothesis_ with competing explanations, source attribution, and a verification pipeline — the way real scientific observation tooling is meant to behave.
+<pre>
+IDENT ......... SENTINEL-01
+CLASS ......... PLANETARY OBSERVATION PLATFORM
+STATUS ........ ONLINE / CINEMATIC
+SENSORS ....... SATELLITE ← OCEAN ← ATMOSPHERE ← GEOLOGY
+POSTURE ....... PROBABILITY-WEIGHTED, NEVER CERTAIN
+LINK .......... /orion-sentinel-ai
+</pre>
 
 ---
 
-## Features
+## // 01 :: SIGNAL
+
+ORION fuses satellite-style imagery, ocean intelligence, atmospheric tracking, and geological data — processed through a simulated multi-agent AI pipeline — into a single cinematic desktop-style web application wrapped in a fully immersive 3D Earth interface.
+
+The platform **never asserts certainty.** Every detection is presented as a *probability-weighted hypothesis* with competing explanations, source attribution, and a verification pipeline — the way real scientific observation tooling is meant to behave.
+
+---
+
+## // 02 :: SENSOR ARRAY (CAPABILITIES)
 
 ### 🛰️ Real-time 3D Earth observation
 
-- Full-screen photorealistic-style 3D globe built on WebGL (`@react-three/fiber` + `three`)
-- **Real satellite imagery** — the globe streams Google-Earth-grade tiles from the free Esri World Imagery service (toggleable, with an offline procedural fallback)
-- Procedurally generated day/night textures with night-time city lights and a terminator sweep
-- Animated cloud coverage, atmospheric glow, sun lighting, and a 7,000-star field
-- Seamless rotate, zoom, and exploration with inertial auto-orbit
+- Full-screen WebGL globe (`@react-three/fiber` + `three`)
+- **Real satellite imagery** — streams Google-Earth-grade tiles from the free Esri World Imagery service (toggleable, offline procedural fallback)
+- Procedural day/night textures with night-time city lights and a terminator sweep
+- Animated clouds, atmospheric glow, sun lighting, and a 7,000-star field
+- Seamless rotate/zoom with inertial auto-orbit
 
 ### 🧠 Simulated AI scanning engine
 
-- Continuous stream of anomaly candidates (geometric formations, thermal signatures, ocean-floor structures, UAP tracks, rapid land-cover change, wildlife biomass, unknown structures)
-- Every event carries a **confidence score**, **severity**, coordinates, timestamp, competing explanations with probability weights, agent attribution, and data-source tags
+- Continuous stream of anomaly candidates — geometric formations, thermal signatures, ocean-floor structures, UAP tracks, rapid land-cover change, wildlife biomass
+- Every event carries confidence score, severity, coordinates, timestamp, competing explanations, agent attribution, and data-source tags
 - Live analysis feed with per-event confidence bars
 
-### 🌊 Ocean intelligence module
+### 🌊 Ocean intelligence
 
-- Underwater globe mode with bathymetric depth rendering and marine-biomass density
-- Pressure-zone profiles, current simulations, and AI creature-identification feed
+- Underwater globe mode with bathymetric depth + marine-biomass density
+- Pressure-zone profiles, current simulations, AI creature-identification feed
 
-### 👽 UAP / atmospheric analysis module
+### 👽 UAP / atmospheric analysis
 
 - Trajectory reconstruction with ground-speed and ceiling estimates
-- Flight-path tables, sensor-confidence breakdowns, and competing explanations — never presented as fact
+- Flight-path tables, sensor-confidence breakdowns, competing explanations — **never presented as fact**
 
-### 🎙️ ORION AI command assistant
+### 🎙️ ORION command assistant
 
-- Natural-language directives such as _"Scan the Pacific Ocean for unusual structures"_
+- Natural-language directives: *"Scan the Pacific Ocean for unusual structures"*
 - Voice input (Chrome / Edge `SpeechRecognition`)
 - Region-aware investigations that spawn live events on the globe
 
 ### 🖥️ Mission-control UI
 
-- Glassmorphism command-center aesthetic with NASA-meets-sci-fi design language
-- Real-time data streams, live ticker, GPU-inference readout, boot sequence, and layer controls
+- Glassmorphism command-center aesthetic, NASA-meets-sci-fi design language
+- Real-time data streams, live ticker, GPU-inference readout, boot sequence, layer controls
 
 ---
 
-## Screenshots
+## // 03 :: THE CONSOLE
 
 ![Live satellite globe](docs/screenshots/globe-demo.gif)
 
-| Main command center                          | Ocean intelligence mode                   |
-| -------------------------------------------- | ----------------------------------------- |
+| Main command center | Ocean intelligence mode |
+|---|---|
 | ![Main view](docs/screenshots/dashboard.png) | ![Ocean mode](docs/screenshots/ocean.png) |
 
-| Anomaly detail panel                       | ORION AI assistant                   |
-| ------------------------------------------ | ------------------------------------ |
+| Anomaly detail panel | ORION AI assistant |
+|---|---|
 | ![Event panel](docs/screenshots/event.png) | ![ORION AI](docs/screenshots/ai.png) |
 
 ---
 
-## Quick start
+## // 04 :: SETUP // POWER UP
 
 **Requirements:** [Node.js](https://nodejs.org) ≥ 20 and npm ≥ 10.
 
 ```bash
-# 1. Clone
-git clone https://github.com/Nortaq-PlayNexus/orion-sentinel-ai.git
-cd orion-sentinel-ai
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
-npm run dev
+$ git clone https://github.com/Nortaq-PlayNexus/orion-sentinel-ai.git
+$ cd orion-sentinel-ai
+$ npm install
+$ npm run dev
 ```
 
-Open <http://localhost:5173> (Vite prints the exact port). The boot sequence initializes the command center, seeds the event grid, and the AI scanner begins streaming detections immediately.
+Open <http://localhost:5173>. The boot sequence initializes the command center, seeds the event grid, and the AI scanner begins streaming detections immediately.
 
-### Production build
+### Production
 
 ```bash
-npm run build        # outputs static assets to dist/
-npm run preview      # serve the production build locally
+$ npm run build        # static assets -> dist/
+$ npm run preview      # serve the production build locally
 ```
 
 ### Docker
 
 ```bash
-docker compose up --build
-# ORION Sentinel AI is served at http://localhost:8080
+$ docker compose up --build     # served at http://localhost:8080
 ```
 
 ---
 
-## Usage guide
+## // 05 :: FLIGHT MANUAL // OPS
 
 ### Navigating the globe
 
 - **Drag** to rotate, **scroll** to zoom, **double-click** to snap the camera.
-- Toggle visual layers from the left panel: satellite constellation, clouds, weather, thermal hotspots, magnetic field, flight arcs, and the reference grid.
+- Toggle layers from the left panel: satellite constellation, clouds, weather, thermal hotspots, magnetic field, flight arcs, reference grid.
 
 ### Investigating an anomaly
 
-1. Click any pulsing marker on the globe — or any entry in the **LIVE AI ANALYSIS STREAM**.
-2. The event panel opens with confidence, coordinates, detection time, and competing explanations.
+1. Click any pulsing marker — or any entry in the **LIVE AI ANALYSIS STREAM**.
+2. The event panel opens with confidence, coordinates, detection time, competing explanations.
 3. Open the **UAP** or **OCEAN** tabs for module-specific analysis.
 
-### Talking to ORION AI
-
-Try these directives in the right-hand assistant panel (or tap the mic for voice):
+### Talking to ORION
 
 ```text
 Scan the Pacific Ocean for unusual structures.
@@ -137,13 +147,13 @@ System status.
 
 ### Underwater globe
 
-Press the **OCEAN** button in the top bar to switch to bathymetric depth rendering, then explore the **OCEAN** module tab for pressure zones, currents, and marine-life detections.
+Press **OCEAN** in the top bar to switch to bathymetric depth rendering, then explore the **OCEAN** module tab for pressure zones, currents, and marine-life detections.
 
 ---
 
-## Architecture
+## // 06 :: INTERNAL WIRING (ARCHITECTURE)
 
-The application is a single-page React app with a clear separation between the **3D globe layer**, the **state layer**, and the **UI shell**.
+A single-page React app with clear separation between the **3D globe layer**, the **state layer**, and the **UI shell**.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -159,81 +169,77 @@ The application is a single-page React app with a clear separation between the *
 └──────────────┴───────────────────────────────┴────────────────┘
 ```
 
-- **`src/globe/`** — the WebGL scene graph. Textures are generated procedurally at runtime, and `imagery.js` streams real Esri satellite tiles with a procedural fallback when offline. Every layer is a self-contained component driven by the shared store.
-- **`src/core/`** — pure-logic modules: geospatial math (`geo.js`), the anomaly engine (`engine.js`), the command interpreter (`orionAI.js`), and procedural texture synthesis (`textures.js`).
-- **`src/store.js`** — a single [Zustand](https://github.com/pmndrs/zustand) store that connects the 3D scene, the analysis stream, and every UI panel.
-- **`src/components/`** — the mission-control UI, all styled through `src/index.css` with a glassmorphism design system.
+- **`src/globe/`** — WebGL scene graph; `imagery.js` streams real Esri satellite tiles with procedural fallback when offline; every layer is a self-contained component driven by the shared store.
+- **`src/core/`** — pure-logic modules: geospatial math (`geo.js`), anomaly engine (`engine.js`), command interpreter (`orionAI.js`), procedural texture synthesis (`textures.js`).
+- **`src/store.js`** — single [Zustand](https://github.com/pmndrs/zustand) store connecting the 3D scene, analysis stream, and every UI panel.
+- **`src/components/`** — mission-control UI, styled through `src/index.css` with a glassmorphism design system.
 
-> 📖 Deep-dive: [docs/architecture.md](docs/architecture.md) · [docs/data-model.md](docs/data-model.md) · [docs/development.md](docs/development.md)
+<details>
+  <summary><code>$ cat manifest/stack</code></summary>
 
----
+| Layer | Technology |
+|---|---|
+| Framework | React 19 |
+| 3D / rendering | Three.js · @react-three/fiber · @react-three/drei |
+| State | Zustand |
+| Build | Vite 8 |
+| Testing | Vitest + @vitest/coverage-v8 |
+| Lint / format | oxlint · Prettier |
+| Delivery | Docker · Nginx · GitHub Actions |
 
-## Tech stack
-
-| Layer            | Technology                                                                                                                                           |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Framework        | [React 19](https://react.dev)                                                                                                                        |
-| 3D / rendering   | [Three.js](https://threejs.org) · [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber) · [@react-three/drei](https://github.com/pmndrs/drei) |
-| State management | [Zustand](https://github.com/pmndrs/zustand)                                                                                                         |
-| Build tool       | [Vite 8](https://vite.dev)                                                                                                                           |
-| Testing          | [Vitest](https://vitest.dev) · `@vitest/coverage-v8`                                                                                                 |
-| Linting          | [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                                                                                |
-| Formatting       | [Prettier](https://prettier.io)                                                                                                                      |
-| Delivery         | Docker · Nginx · GitHub Actions                                                                                                                      |
+</details>
 
 ---
 
-## Development
+## // 07 :: COMMAND EXERCISES (DEV)
 
 ```bash
-npm run dev             # dev server with HMR
-npm run lint            # static analysis (oxlint)
-npm run format          # auto-format with Prettier
-npm run test            # unit tests (Vitest)
-npm run test:coverage   # tests + coverage report
-npm run build           # production bundle
-npm run check           # lint + format + test + build in one pass
+$ npm run dev             # dev server with HMR
+$ npm run lint            # static analysis (oxlint)
+$ npm run format          # auto-format with Prettier
+$ npm run test            # unit tests (Vitest)
+$ npm run test:coverage   # tests + coverage report
+$ npm run build           # production bundle
+$ npm run check           # lint + format + test + build in one pass
 ```
 
-Run `npm run check` before opening a pull request — CI runs the same gate. See [docs/development.md](docs/development.md) for the full workflow and [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+Run `npm run check` before opening a PR — CI runs the same gate.
 
 ---
 
-## Documentation
+## // 08 :: ARCHIVE // RADIO LOG
 
-| Document                                     | Purpose                                                     |
-| -------------------------------------------- | ----------------------------------------------------------- |
-| [docs/architecture.md](docs/architecture.md) | System design, module layout, and rendering pipeline        |
-| [docs/data-model.md](docs/data-model.md)     | Anomaly schema, store shape, and event lifecycle            |
-| [docs/api.md](docs/api.md)                   | ORION AI command reference and agent behaviors              |
-| [docs/development.md](docs/development.md)   | Local setup, tooling, testing, and release workflow         |
-| [docs/deployment.md](docs/deployment.md)     | Production build, Docker, and hosting guidance              |
-| [docs/security.md](docs/security.md)         | Security posture, disclosure policy, and dependency hygiene |
-| [CONTRIBUTING.md](CONTRIBUTING.md)           | How to contribute, branching, and PR process                |
-| [ROADMAP.md](ROADMAP.md)                     | Planned features and direction                              |
-| [CHANGELOG.md](CHANGELOG.md)                 | Release history                                             |
+<details>
+  <summary><code>$ ls docs/ - FULL MANIFEST</code></summary>
 
----
+| Document | Purpose |
+|---|---|
+| [docs/architecture.md](docs/architecture.md) | system design, module layout, rendering pipeline |
+| [docs/data-model.md](docs/data-model.md) | anomaly schema, store shape, event lifecycle |
+| [docs/api.md](docs/api.md) | ORION AI command reference, agent behaviors |
+| [docs/development.md](docs/development.md) | local setup, tooling, testing, release workflow |
+| [docs/deployment.md](docs/deployment.md) | production build, Docker, hosting |
+| [docs/security.md](docs/security.md) | security posture, disclosure, dependency hygiene |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | how to contribute, branching, PR process |
+| [ROADMAP.md](ROADMAP.md) | planned features and direction |
+| [CHANGELOG.md](CHANGELOG.md) | release history |
 
-## Contributing
-
-Contributions of all kinds are welcome — features, fixes, documentation, and feedback.
-
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
-2. Fork the repo and create a branch (`git checkout -b feat/your-feature`).
-3. Run `npm run check` locally until everything is green.
-4. Open a pull request — our [PR template](.github/PULL_REQUEST_TEMPLATE.md) will guide you.
-
-Security issues should be reported privately per our [security policy](docs/security.md) — **not** via public issues.
+</details>
 
 ---
 
-## License
+## // 09 :: LEGAL // SIGNAL
 
-Released under the [MIT License](LICENSE). Satellite imagery is provided by the free public Esri World Imagery service (`Imagery © Esri, Maxar, Earthstar Geographics`); when the layer is disabled or the network is unavailable, the Earth is rendered with procedurally generated textures and no external asset licensing is required.
+**License:** [MIT](LICENSE). Satellite imagery provided by the free public Esri World Imagery service (`Imagery © Esri, Maxar, Earthstar Geographics`); when the layer is disabled or the network is unavailable, the Earth renders with procedurally generated textures and no external asset licensing is required.
 
-<div align="center">
+Security issues should be reported privately per [docs/security.md](docs/security.md) — **not** via public issues.
 
-**ORION Sentinel AI** · Built with ❤️ for explorers, researchers, and future discovery organizations.
+---
 
-</div>
+```
+ ┌─────────────────────────────────────────────┐
+ │  ORBIT LOCKED // EARTH IN VIEW              │
+ │  SENTINEL-01 // OBSERVE, HYPOTHESIZE, VERIFY│
+ └─────────────────────────────────────────────┘
+END OF TRANSMISSION
+```
